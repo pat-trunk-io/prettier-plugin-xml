@@ -1,77 +1,77 @@
 version: 0.1
 cli:
-    version: 1.17.0
+  version: 1.17.0
 plugins:
-    sources:
-        - id: trunk
-          ref: v1.2.5
-          uri: https://github.com/trunk-io/plugins
+  sources:
+    - id: trunk
+      ref: v1.2.5
+      uri: https://github.com/trunk-io/plugins
 runtimes:
-    enabled:
-        - node@18.12.1
+  enabled:
+    - node@18.12.1
 lint:
-    files:
-        - name: xml
-          extensions:
-              - xml
-    enabled:
-        - prettier@3.0.3
-    definitions:
-        - name: prettier
-          extra_packages:
-              - "@prettier/plugin-xml"
-          commands:
-              - name: format
-                output: rewrite
-                run: prettier -w ${target}
-                success_codes: [0]
-                batch: true
-                in_place: true
-                formatter: true
-                files:
-                    - typescript
-                    - yaml
-                    - css
-                    - sass
-                    - html
-                    - markdown
-                    - json
-                    - javascript
-                    - graphql
-                    - prettier_supported_configs
-              - name: format-xml
-                output: rewrite
-                run: prettier --plugin=@prettier/plugin-xml -w ${target}
-                success_codes: [0]
-                batch: true
-                in_place: true
-                formatter: true
-                files:
-                    - xml
-          tools: [prettier]
-          suggest_if: files_present
-          direct_configs:
-              - .prettierrc
-              - .prettierrc.json
-              - .prettierrc.yml
-              - .prettierrc.yaml
-              - .prettierrc.json5
-              - .prettierrc.js
-              - .prettierrc.cjs
-              - prettier.config.js
-              - prettier.config.cjs
-              - .prettierrc.toml
-              - .prettierignore
-          affects_cache:
-              - package.json
-              - .editorconfig # Undocumented config file
-          known_good_version: 2.6.2
-          version_command:
-              parse_regex: ${semver}
-              run: prettier --version
+  files:
+    - name: xml
+      extensions:
+        - xml
+  enabled:
+    - prettier@3.0.3
+  definitions:
+    - name: prettier
+      extra_packages:
+        - "@prettier/plugin-xml"
+      commands:
+        - name: format
+          output: rewrite
+          run: prettier -w ${target}
+          success_codes: [0]
+          batch: true
+          in_place: true
+          formatter: true
+          files:
+            - typescript
+            - yaml
+            - css
+            - sass
+            - html
+            - markdown
+            - json
+            - javascript
+            - graphql
+            - prettier_supported_configs
+        - name: format-xml
+          output: rewrite
+          run: prettier --plugin=@prettier/plugin-xml -w ${target}
+          success_codes: [0]
+          batch: true
+          in_place: true
+          formatter: true
+          files:
+            - xml
+      tools: [prettier]
+      suggest_if: files_present
+      direct_configs:
+        - .prettierrc
+        - .prettierrc.json
+        - .prettierrc.yml
+        - .prettierrc.yaml
+        - .prettierrc.json5
+        - .prettierrc.js
+        - .prettierrc.cjs
+        - prettier.config.js
+        - prettier.config.cjs
+        - .prettierrc.toml
+        - .prettierignore
+      affects_cache:
+        - package.json
+        - .editorconfig # Undocumented config file
+      known_good_version: 2.6.2
+      version_command:
+        parse_regex: ${semver}
+        run: prettier --version
 actions:
-    enabled:
-        - trunk-announce
-        - trunk-check-pre-push
-        - trunk-fmt-pre-commit
-        - trunk-upgrade-available
+  enabled:
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit
+    - trunk-upgrade-available
